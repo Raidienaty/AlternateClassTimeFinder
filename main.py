@@ -37,6 +37,11 @@ def main():
 
     matrixDF = matrixDF[['Day', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday']]
 
+    matrixDF.head(10)
+
+    #['8:00am - 9:15am', '9:30am - 10:45am', '11:00am - 12:15pm', '12:30pm - 1:45pm', '2:00pm - 3:15pm', '3:30pm - 4:45pm', '5:00pm - 6:15pm', '6:30pm - 7:45pm', '8:00pm - 9:15pm']
+    # matrixDF = matrixDF.sort_values(by='Day', axis=1)
+
     matrixDF.to_excel('Output/exported.xlsx')
 
 main()
