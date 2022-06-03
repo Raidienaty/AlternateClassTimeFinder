@@ -1,5 +1,5 @@
 from numpy import matrix
-import pandas
+from pandas import *
 import os
 
 def findDocument():
@@ -33,15 +33,15 @@ def findDocument():
 def main():
     document = findDocument()
 
-    matrixDF = pandas.read_excel(document)
+    matrixDF = read_excel(document)
 
     matrixDF = matrixDF[['Day', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday']]
     matrixDF = matrixDF[matrixDF.Day != 'Time']
 
     #matrixDF.head(10)
 
-    #matrixDF.reindex(['8:00am - 9:15am', '9:30am - 10:45am', '11:00am - 12:15pm', '12:30pm - 1:45pm', '2:00pm - 3:15pm', '3:30pm - 4:45pm', '5:00pm - 6:15pm', '6:30pm - 7:45pm', '8:00pm - 9:15pm'])
-    matrixDF = matrixDF.sort_values(axis=1)
+    order = ['8:00am - 9:15am', '9:30am - 10:45am', '11:00am - 12:15pm', '12:30pm - 1:45pm', '2:00pm - 3:15pm', '3:30pm - 4:45pm', '5:00pm - 6:15pm', '6:30pm - 7:45pm', '8:00pm - 9:15pm']
+    matrixDF = matrixDF.reindex(matrixDF['Day'].map(dict(zip(order, range(len(order))))).sort_values().index)
 
     matrixDF.to_excel('Output/exported.xlsx')
 
